@@ -1,5 +1,4 @@
 import React from "react";
-
 export default () => {
-  return <h1>HELLO REACT!</h1>;
+  return <h1>HELLO festival!</h1>;
 };
