@@ -1,4 +1,12 @@
 import React from "react";
+import { CONTAINER, CONTENTS } from "../Common/GlobalStyles";
+
 export default () => {
-  return <h1>HELLO festival!</h1>;
+  return (
+    <CONTENTS>
+      <CONTAINER>
+        <h1>축제 행사</h1>
+      </CONTAINER>
+    </CONTENTS>
+  );
 };
