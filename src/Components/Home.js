@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { CONTAINER, CONTENTS } from "../Common/GlobalStyles";
+import { CONTAINER, CONTENTS } from "../Style/GlobalStyles";
 
 const ROW = styled.div`
   margin-top: 100px;

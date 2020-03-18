@@ -1,5 +1,5 @@
 import React from "react";
-import { CONTAINER, CONTENTS } from "../Common/GlobalStyles";
+import { CONTAINER, CONTENTS } from "../Style/GlobalStyles";
 
 export default () => {
   return (
