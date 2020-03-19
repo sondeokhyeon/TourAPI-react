@@ -1,13 +1,13 @@
 import React from "react";
 import GlobalStyle from "./Style/GlobalStyles";
 import Router from "./Common/Router";
-import DataContext from "./Common/Context";
+import DataStore from "./Common/Store";
 
 export default () => {
   return (
-    <DataContext>
+    <DataStore>
       <GlobalStyle />
       <Router />
-    </DataContext>
+    </DataStore>
   );
 };
