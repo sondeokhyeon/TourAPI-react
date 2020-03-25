@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CONTAINER, CONTENTS } from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
 import { getSpotList, useDataState, useDataDispatch } from "../Common/Store";
@@ -10,18 +10,16 @@ export default () => {
   const getData = () => {
     getSpotList(dispatch);
   };
+
+  useEffect(() => {
+    getSpotList(dispatch);
+  }, [dispatch]);
+
   const { loading, data, error } = state;
 
   if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
-  if (!data)
-    return (
-      <CONTENTS>
-        <CONTAINER>
-          <button onClick={getData}>테스트</button>
-        </CONTAINER>
-      </CONTENTS>
-    );
+  if (!data) return null;
 
   const {
     response: {

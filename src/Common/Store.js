@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
+import { initState } from "../util/AsyncUtil";
 import axios from "axios";
 
 function reducer(state, action) {
@@ -30,11 +31,7 @@ const stateContext = createContext(null);
 const dispatchContext = createContext(null);
 
 const DataStore = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    loading: false,
-    data: null,
-    error: null
-  });
+  const [state, dispatch] = useReducer(reducer, initState);
   return (
     <stateContext.Provider value={state}>
       <dispatchContext.Provider value={dispatch}>
