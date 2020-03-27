@@ -4,7 +4,7 @@ export const initState = {
   error: null
 };
 
-export default function AsyncDispatch(type, promiseFn) {
+export function AsyncDispatch(promiseFn) {
   async function actionHandler(dispatch, ...rest) {
     dispatch({ type: "LOADING" });
     try {

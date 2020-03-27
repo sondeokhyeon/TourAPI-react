@@ -1,24 +1,48 @@
-import React, { useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useReducer
+} from "react";
 import { CONTAINER, CONTENTS } from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
 import { getSpotList, useDataState, useDataDispatch } from "../Common/Store";
+import AreaList from "./AreaList";
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "add":
+      return {
+        ...state,
+        data: action.data
+      };
+    default:
+      throw new Error("unhandled Err");
+  }
+};
 
 export default () => {
+  const param =
+    "contentTypeId=12&areaCode=1&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=24&pageNo=";
+  const pageNo = useRef(0);
   const state = useDataState();
   const dispatch = useDataDispatch();
+  // const [rstate, rdispatch] = useReducer(reducer, []);
+  const [info, setInfo] = useState([]);
 
-  const getData = () => {
-    getSpotList(dispatch);
-  };
-
-  useEffect(() => {
-    getSpotList(dispatch);
+  const getData = useCallback(() => {
+    getSpotList(dispatch, { param: param + (pageNo.current += 1) });
   }, [dispatch]);
 
-  const { loading, data, error } = state;
+  useEffect(() => {
+    getData();
+  }, [getData]);
 
+  const { loading, data, error } = state;
   if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
+
   if (!data) return null;
 
   const {
@@ -29,17 +53,21 @@ export default () => {
     }
   } = data;
 
+  //rdispatch({ type: "add", data: item });
   return (
     <CONTENTS>
       <CONTAINER>
         <h1>관광지</h1>
-        <button onClick={getData}>테스트</button>
       </CONTAINER>
+      <AreaList />
       <div>
-        {item.map((i, index) => (
-          <div key={index}>{i.addr2}</div>
-        ))}
+        <div>{data && <DetailView item={item} />}</div>
+        <button onClick={() => getData()}>더보기</button>
       </div>
     </CONTENTS>
   );
+};
+
+const DetailView = ({ item }) => {
+  return item.map((i, index) => <div key={index}>{i.addr2}</div>);
 };
