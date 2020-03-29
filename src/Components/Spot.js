@@ -1,26 +1,8 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useReducer
-} from "react";
+import React, { useEffect, useRef } from "react";
 import { CONTAINER, CONTENTS } from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
 import { getSpotList, useDataState, useDataDispatch } from "../Common/Store";
 import AreaList from "./AreaList";
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "add":
-      return {
-        ...state,
-        data: action.data
-      };
-    default:
-      throw new Error("unhandled Err");
-  }
-};
 
 export default () => {
   const param =
@@ -28,32 +10,22 @@ export default () => {
   const pageNo = useRef(0);
   const state = useDataState();
   const dispatch = useDataDispatch();
-  // const [rstate, rdispatch] = useReducer(reducer, []);
-  const [info, setInfo] = useState([]);
-
-  const getData = useCallback(() => {
-    getSpotList(dispatch, { param: param + (pageNo.current += 1) });
-  }, [dispatch]);
 
   useEffect(() => {
-    getData();
-  }, [getData]);
+    getSpotList(dispatch, null, { param: param + (pageNo.current += 1) });
+  }, [dispatch]);
 
   const { loading, data, error } = state;
   if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
-
   if (!data) return null;
 
-  const {
-    response: {
-      body: {
-        items: { item }
-      }
-    }
-  } = data;
+  const getData = () => {
+    getSpotList(dispatch, data, {
+      param: param + (pageNo.current += 1)
+    });
+  };
 
-  //rdispatch({ type: "add", data: item });
   return (
     <CONTENTS>
       <CONTAINER>
@@ -61,8 +33,14 @@ export default () => {
       </CONTAINER>
       <AreaList />
       <div>
-        <div>{data && <DetailView item={item} />}</div>
-        <button onClick={() => getData()}>더보기</button>
+        {data && <DetailView item={data} />}
+        <button
+          onClick={() => {
+            getData();
+          }}
+        >
+          더보기
+        </button>
       </div>
     </CONTENTS>
   );

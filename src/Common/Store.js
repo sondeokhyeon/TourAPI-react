@@ -7,21 +7,25 @@ function reducer(state, action) {
     case "LOADING":
       return {
         loading: true,
-        data: null,
+        data: [],
         error: null
       };
     case "SUCCESS":
       return {
         loading: false,
-        data: action.data,
+        data: state.data.concat(
+          action.prevdata ? action.prevdata : "",
+          action.data
+        ),
         error: null
       };
     case "ERROR":
       return {
         loading: false,
-        data: null,
+        data: [],
         error: action.error
       };
+
     default:
       throw new Error(`unhandled action type ${action.type}`);
   }
