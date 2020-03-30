@@ -1,20 +1,31 @@
 export const initState = {
   loading: false,
-  data: [],
+  data: {
+    info: [],
+    minor: []
+  },
   error: null
 };
 
-export function AsyncDispatch(promiseFn) {
+export function AsyncDispatch(promiseFn, key) {
   async function actionHandler(dispatch, prevdata, ...rest) {
     dispatch({ type: "LOADING" });
     try {
       const data = await promiseFn(...rest);
       if (data.response.header.resultCode === "0000") {
-        dispatch({
-          type: "SUCCESS",
-          prevdata,
-          data: data.response.body.items.item
-        });
+        if (!prevdata) {
+          dispatch({
+            type: "SUCCESS",
+            data: data.response.body.items.item,
+            key
+          });
+        } else {
+          dispatch({
+            type: "ADD",
+            prevdata,
+            data: data.response.body.items.item
+          });
+        }
       } else {
         throw new Error("result Code Err");
       }

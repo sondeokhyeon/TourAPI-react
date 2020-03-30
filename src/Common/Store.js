@@ -11,12 +11,21 @@ function reducer(state, action) {
         error: null
       };
     case "SUCCESS":
+      console.log(state);
+      console.log(action.key, action.data);
       return {
         loading: false,
-        data: state.data.concat(
-          action.prevdata ? action.prevdata : "",
-          action.data
-        ),
+        data: {
+          [action.key]: state.data.concat(action.data)
+        },
+        error: null
+      };
+    case "ADD":
+      return {
+        loading: false,
+        data: {
+          info: state.data.concat(action.prevdata, action.data)
+        },
         error: null
       };
     case "ERROR":
@@ -61,6 +70,7 @@ export function useDataDispatch() {
   return dispatch;
 }
 
-export const getSpotList = AsyncDispatch(api.getSpotList);
+export const getSpotList = AsyncDispatch(api.getSpotList, "info");
+export const getMinorList = AsyncDispatch(api.getMinorList, "minor");
 
 export default DataStore;
