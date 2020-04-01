@@ -7,16 +7,18 @@ function reducer(state, action) {
     case "LOADING":
       return {
         loading: true,
-        data: [],
+        data: {
+          info: [],
+          minor: []
+        },
         error: null
       };
     case "SUCCESS":
-      console.log(state);
-      console.log(action.key, action.data);
       return {
         loading: false,
         data: {
-          [action.key]: state.data.concat(action.data)
+          ...state.data,
+          [action.key]: state.data[action.key].concat(action.data)
         },
         error: null
       };
@@ -24,7 +26,8 @@ function reducer(state, action) {
       return {
         loading: false,
         data: {
-          info: state.data.concat(action.prevdata, action.data)
+          ...state.data,
+          info: state.data.info.concat(action.prevdata, action.data)
         },
         error: null
       };

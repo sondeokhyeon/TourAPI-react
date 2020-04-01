@@ -1,11 +1,12 @@
 import React from "react";
 
-const AreaList = ({ setAreaCode, major, setMajor, getMinor }) => {
+const AreaList = ({ setAreaCode, major, setMajor, minor, getMinor }) => {
   const changeAction = (code, area) => {
     setMajor(area);
     setAreaCode(code);
-    getMinor();
+    getMinor(code);
   };
+  console.log(minor);
 
   return (
     <div>
@@ -64,6 +65,9 @@ const AreaList = ({ setAreaCode, major, setMajor, getMinor }) => {
         </li>
       </ul>
       <ul></ul>
+      {minor.map(item => (
+        <li key={item.rnum}>{item.name}</li>
+      ))}
     </div>
   );
 };

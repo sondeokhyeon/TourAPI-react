@@ -33,7 +33,6 @@ export default () => {
       param: param + (pageNo.current += 1)
     });
   };
-  console.log(data);
   return (
     <CONTENTS>
       <CONTAINER>
@@ -42,15 +41,15 @@ export default () => {
           setAreaCode={setAreaCode}
           major={major}
           setMajor={setMajor}
-          getMinor={() => {
+          minor={data.minor}
+          getMinor={no => {
             getMinorList(dispatch, null, {
-              param:
-                "numOfRows=50&MobileOS=ETC&MobileApp=test&areaCode=" + areaCode
+              param: "numOfRows=50&MobileOS=ETC&MobileApp=test&areaCode=" + no
             });
           }}
         />
         <div className="container">
-          {/* {data && <DetailView item={data.info} />} */}
+          {data && <DetailView item={data.info} />}
         </div>
         <button
           onClick={() => {
