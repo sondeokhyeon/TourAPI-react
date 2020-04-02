@@ -18,6 +18,7 @@ export default () => {
   const dispatch = useDataDispatch();
   const pageNo = useRef(1);
   const [major, setMajor] = useState("전체");
+  const height = useRef(1920);
 
   useEffect(() => {
     getSpotList(dispatch, null, { param: param + pageNo.current });
@@ -27,14 +28,20 @@ export default () => {
   if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
   if (!data) return null;
-
-  const getData = () => {
-    getSpotList(dispatch, data.info, {
+  const getData = async () => {
+    await getSpotList(dispatch, data.info, {
       param: param + (pageNo.current += 1)
     });
+    await window.scroll({
+      top: height.current
+    });
+    height.current += 1920;
   };
+
+  console.log(data);
+
   return (
-    <CONTENTS>
+    <CONTENTS id="container">
       <CONTAINER>
         <h1>관광지</h1>
         <AreaList

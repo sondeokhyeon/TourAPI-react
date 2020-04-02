@@ -17,7 +17,17 @@ export const CONTAINER = styled.div`
   & h1 {
     font-size: 3rem;
     font-weight: bold;
-    padding-left: 30px;
+    padding-left: 20px;
+  }
+  & h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    padding-left: 20px;
+  }
+  & h3 {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-left: 20px;
   }
 `;
 

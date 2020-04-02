@@ -1,4 +1,30 @@
 import React from "react";
+import styled from "styled-components";
+
+const WRAP = styled.div``;
+const TITLE = styled.h2``;
+const MAJOR = styled.ul`
+  & li {
+    margin-left: 10px;
+    display: inline-block;
+  }
+  & li + li {
+    margin: 20px 0;
+    padding-left: 25px;
+  }
+`;
+const MINOR = styled.div`
+  width: 1200px;
+
+  & div {
+    display: flex;
+    width: 1000px;
+    overflow: scroll;
+    & span {
+      width: 100px;
+    }
+  }
+`;
 
 const AreaList = ({ setAreaCode, major, setMajor, minor, getMinor }) => {
   const changeAction = (code, area) => {
@@ -6,12 +32,11 @@ const AreaList = ({ setAreaCode, major, setMajor, minor, getMinor }) => {
     setAreaCode(code);
     getMinor(code);
   };
-  console.log(minor);
 
   return (
-    <div>
-      <span>{major}</span>
-      <ul>
+    <WRAP>
+      <TITLE>{major}</TITLE>
+      <MAJOR>
         <li className="areaCodes" onClick={() => changeAction("1", "서울")}>
           서울
         </li>
@@ -63,12 +88,15 @@ const AreaList = ({ setAreaCode, major, setMajor, minor, getMinor }) => {
         <li className="areaCodes" onClick={() => changeAction("34", "충남")}>
           충남
         </li>
-      </ul>
-      <ul></ul>
-      {minor.map(item => (
-        <li key={item.rnum}>{item.name}</li>
-      ))}
-    </div>
+      </MAJOR>
+      <MINOR>
+        <div>
+          {minor.map((item, index) => {
+            return <span key={item.rnum}>{item.name}</span>;
+          })}
+        </div>
+      </MINOR>
+    </WRAP>
   );
 };
 
