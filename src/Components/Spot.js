@@ -28,6 +28,7 @@ export default () => {
   if (loading) return <Loading />;
   if (error) return <div>Error...</div>;
   if (!data) return null;
+
   const getData = async () => {
     await getSpotList(dispatch, data.info, {
       param: param + (pageNo.current += 1)
@@ -38,13 +39,12 @@ export default () => {
     height.current += 1920;
   };
 
-  console.log(data);
-
   return (
     <CONTENTS id="container">
       <CONTAINER>
         <h1>관광지</h1>
         <AreaList
+          areaCode={areaCode}
           setAreaCode={setAreaCode}
           major={major}
           setMajor={setMajor}

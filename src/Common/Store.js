@@ -14,6 +14,7 @@ function reducer(state, action) {
         error: null
       };
     case "SUCCESS":
+      console.log(state.data.info);
       return {
         loading: false,
         data: {
@@ -22,6 +23,7 @@ function reducer(state, action) {
         },
         error: null
       };
+
     case "ADD":
       return {
         loading: false,

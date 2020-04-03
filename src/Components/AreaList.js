@@ -26,11 +26,31 @@ const MINOR = styled.div`
   }
 `;
 
-const AreaList = ({ setAreaCode, major, setMajor, minor, getMinor }) => {
+const AreaList = ({
+  areaCode,
+  setAreaCode,
+  major,
+  setMajor,
+  minor,
+  getMinor
+}) => {
   const changeAction = (code, area) => {
+    if (areaCode === code) {
+      return false;
+    }
     setMajor(area);
-    setAreaCode(code);
     getMinor(code);
+    setAreaCode(code);
+  };
+  const setDiv = ({ minor }) => {
+    console.log(minor);
+    return (
+      <div>
+        <div>minor[0].name</div>
+        <div>minor[1]</div>
+        <div>minor[2]</div>
+      </div>
+    );
   };
 
   return (
@@ -90,11 +110,10 @@ const AreaList = ({ setAreaCode, major, setMajor, minor, getMinor }) => {
         </li>
       </MAJOR>
       <MINOR>
-        <div>
-          {minor.map((item, index) => {
-            return <span key={item.rnum}>{item.name}</span>;
-          })}
-        </div>
+        {/* <div> {setDiv(minor)}</div> */}
+        {minor.map(item => {
+          return <li>{item.name}</li>;
+        })}
       </MINOR>
     </WRAP>
   );
