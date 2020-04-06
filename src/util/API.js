@@ -2,7 +2,6 @@ import axios from "axios";
 
 export async function getMinorList(arg) {
   const { param } = arg;
-  console.log(param);
   const response = await axios.get(
     "https://api.visitkorea.or.kr/openapi/service/rest/KorService/" +
       "areaCode" +

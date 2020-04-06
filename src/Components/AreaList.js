@@ -13,17 +13,8 @@ const MAJOR = styled.ul`
     padding-left: 25px;
   }
 `;
-const MINOR = styled.div`
-  width: 1200px;
-
-  & div {
-    display: flex;
-    width: 1000px;
-    overflow: scroll;
-    & span {
-      width: 100px;
-    }
-  }
+const MINOR = styled.select`
+  display: ${props => props.display};
 `;
 
 const AreaList = ({
@@ -32,26 +23,41 @@ const AreaList = ({
   major,
   setMajor,
   minor,
+  setMinorDisplay,
+  minorDisplay,
+  setMinorCode,
   getMinor
 }) => {
   const changeAction = (code, area) => {
     if (areaCode === code) {
       return false;
     }
+    setMinorDisplay("block");
     setMajor(area);
     getMinor(code);
     setAreaCode(code);
   };
-  const setDiv = ({ minor }) => {
-    console.log(minor);
-    return (
-      <div>
-        <div>minor[0].name</div>
-        <div>minor[1]</div>
-        <div>minor[2]</div>
-      </div>
-    );
-  };
+
+  // const setDiv = ({ ...minor }, length) => {
+  //   let test = "";
+  //   for (var i = 0; i < length; i++) {
+  //     console.log(minor[i]);
+  //     if (i === 0) test += "<div>";
+  //     test += `<div onClick=${() => test()}>
+  //                ${minor[i].name}
+  //              </div>`;
+  //     if (i % 3 === 0) {
+  //       if (i === 0) {
+  //         continue;
+  //       }
+  //       test += "</div>";
+  //       if (i <= length) {
+  //         test += "<div>";
+  //       }
+  //     }
+  //   }
+  //   return test;
+  // };
 
   return (
     <WRAP>
@@ -109,11 +115,15 @@ const AreaList = ({
           충남
         </li>
       </MAJOR>
-      <MINOR>
-        {/* <div> {setDiv(minor)}</div> */}
-        {minor.map(item => {
-          return <li>{item.name}</li>;
-        })}
+      <MINOR
+        display={minorDisplay}
+        onChange={e => setMinorCode(e.target.value)}
+      >
+        {minor.map((item, index) => (
+          <option key={index} value={item.code}>
+            {item.name}
+          </option>
+        ))}
       </MINOR>
     </WRAP>
   );

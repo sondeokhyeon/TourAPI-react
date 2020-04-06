@@ -12,13 +12,17 @@ import "../Style/spot.scss";
 import noImage from "../images/noimage.jpg";
 
 export default () => {
-  const [areaCode, setAreaCode] = useState("");
-  const param = `contentTypeId=12&areaCode=${areaCode}&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=24&pageNo=`;
   const state = useDataState();
   const dispatch = useDataDispatch();
-  const pageNo = useRef(1);
+
+  const [areaCode, setAreaCode] = useState("");
   const [major, setMajor] = useState("전체");
+  const [minorDisplay, setMinorDisplay] = useState("none");
+  const [minorCode, setMinorCode] = useState("");
+
   const height = useRef(1920);
+  const pageNo = useRef(1);
+  const param = `contentTypeId=12&areaCode=${areaCode}&sigunguCode=${minorCode}&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=24&pageNo=`;
 
   useEffect(() => {
     getSpotList(dispatch, null, { param: param + pageNo.current });
@@ -49,6 +53,9 @@ export default () => {
           major={major}
           setMajor={setMajor}
           minor={data.minor}
+          setMinorCode={setMinorCode}
+          minorDisplay={minorDisplay}
+          setMinorDisplay={setMinorDisplay}
           getMinor={no => {
             getMinorList(dispatch, null, {
               param: "numOfRows=50&MobileOS=ETC&MobileApp=test&areaCode=" + no
