@@ -5,22 +5,32 @@ import * as api from "../util/API";
 function reducer(state, action) {
   switch (action.type) {
     case "LOADING":
+      if (action.key === "info") {
+        return {
+          loading: true,
+          data: {
+            info: [],
+            minor: state.data.minor,
+          },
+          error: null,
+        };
+      }
       return {
         loading: true,
         data: {
+          minor: [],
           info: [],
-          minor: []
         },
-        error: null
+        error: null,
       };
     case "SUCCESS":
       return {
         loading: false,
         data: {
           ...state.data,
-          [action.key]: state.data[action.key].concat(action.data)
+          [action.key]: state.data[action.key].concat(action.data),
         },
-        error: null
+        error: null,
       };
 
     case "ADD":
@@ -28,15 +38,15 @@ function reducer(state, action) {
         loading: false,
         data: {
           ...state.data,
-          info: state.data.info.concat(action.prevdata, action.data)
+          info: state.data.info.concat(action.prevdata, action.data),
         },
-        error: null
+        error: null,
       };
     case "ERROR":
       return {
         loading: false,
         data: [],
-        error: action.error
+        error: action.error,
       };
 
     default:

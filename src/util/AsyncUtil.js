@@ -2,14 +2,14 @@ export const initState = {
   loading: false,
   data: {
     info: [],
-    minor: []
+    minor: [],
   },
-  error: null
+  error: null,
 };
 
 export function AsyncDispatch(promiseFn, key) {
   async function actionHandler(dispatch, prevdata, ...rest) {
-    dispatch({ type: "LOADING" });
+    dispatch({ type: "LOADING", key: key });
     try {
       const data = await promiseFn(...rest);
       if (data.response.header.resultCode === "0000") {
@@ -17,13 +17,13 @@ export function AsyncDispatch(promiseFn, key) {
           dispatch({
             type: "SUCCESS",
             data: data.response.body.items.item,
-            key
+            key,
           });
         } else {
           dispatch({
             type: "ADD",
             prevdata,
-            data: data.response.body.items.item
+            data: data.response.body.items.item,
           });
         }
       } else {

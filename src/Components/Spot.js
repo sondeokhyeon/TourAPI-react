@@ -5,7 +5,7 @@ import {
   getSpotList,
   getMinorList,
   useDataState,
-  useDataDispatch
+  useDataDispatch,
 } from "../Common/Store";
 import AreaList from "./AreaList";
 import "../Style/spot.scss";
@@ -35,10 +35,10 @@ export default () => {
 
   const getData = async () => {
     await getSpotList(dispatch, data.info, {
-      param: param + (pageNo.current += 1)
+      param: param + (pageNo.current += 1),
     });
     await window.scroll({
-      top: height.current
+      top: height.current,
     });
     height.current += 1920;
   };
@@ -54,39 +54,52 @@ export default () => {
           setMajor={setMajor}
           minor={data.minor}
           setMinorCode={setMinorCode}
+          minorCode={minorCode}
           minorDisplay={minorDisplay}
           setMinorDisplay={setMinorDisplay}
-          getMinor={no => {
+          getMinor={(no) => {
             getMinorList(dispatch, null, {
-              param: "numOfRows=50&MobileOS=ETC&MobileApp=test&areaCode=" + no
+              param: "numOfRows=50&MobileOS=ETC&MobileApp=test&areaCode=" + no,
             });
           }}
+          pageNo={pageNo}
         />
         <div className="container">
-          {data && <DetailView item={data.info} />}
+          {data.info && <DetailView item={data.info} />}
         </div>
-        <button
-          onClick={() => {
-            getData();
-          }}
-        >
-          더보기
-        </button>
+        {data.info.length >= 24 && data.info[data.info.length - 1] && (
+          <button
+            onClick={() => {
+              getData();
+            }}
+          >
+            더보기
+          </button>
+        )}
       </CONTAINER>
     </CONTENTS>
   );
 };
 
 const DetailView = ({ item }) => {
-  return item.map((i, index) => (
-    <div key={index} className="tinfo">
-      <img
-        className="infoimg"
-        src={i.firstimage ? i.firstimage : noImage}
-        alt={i.title}
-      />
-      <div className="infoTitle">{i.title}</div>
-      <div className="infoAddr">{i.addr1}</div>
-    </div>
-  ));
+  if (item.length === 0) {
+    return null;
+  } else if (item[0] === undefined) {
+    return <span>에러가 발생하였습니다</span>;
+  } else {
+    return item.map((i, index) => {
+      if (i)
+        return (
+          <div key={index} className="tinfo">
+            <img
+              className="infoimg"
+              src={i.firstimage ? i.firstimage : noImage}
+              alt={i.title}
+            />
+            <div className="infoTitle">{i.title}</div>
+            <div className="infoAddr">{i.addr1}</div>
+          </div>
+        );
+    });
+  }
 };

@@ -4,19 +4,19 @@ export const asyncReducer = (state, action) => {
       return {
         loading: true,
         data: null,
-        error: null
+        error: null,
       };
     case "SUCCESS":
       return {
         loading: false,
         data: action.data,
-        error: null
+        error: null,
       };
     case "ERROR":
       return {
         loading: false,
         data: null,
-        error: action.error
+        error: action.error,
       };
     default:
       throw new Error(`unhandled actions type is ${action.type}`);

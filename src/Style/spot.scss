@@ -20,6 +20,9 @@
     text-align: center;
     font-size: 1rem;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .infoAddr {
