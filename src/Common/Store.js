@@ -84,7 +84,7 @@ export function useDataDispatch() {
   return dispatch;
 }
 
-export const getSpotList = AsyncDispatch(api.getSpotList, "info");
+export const getMajorList = AsyncDispatch(api.getMajorList, "info");
 export const getMinorList = AsyncDispatch(api.getMinorList, "minor");
 
 export default DataStore;

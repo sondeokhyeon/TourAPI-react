@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch
+  Switch,
 } from "react-router-dom";
 import HOME from "../Components/Home";
 import Spot from "../Components/Spot";
@@ -13,19 +13,23 @@ import Eatery from "../Components/Eatery";
 import ACC from "../Components/Accommodations";
 import ERROR from "../Common/Error";
 import Header from "../Common/Header";
+import Detail from "../Common/Detail";
 
-export default () => (
-  <Router>
-    <Header />
-    <Switch>
-      <Route path="/spot" component={Spot} />
-      <Route path="/festival" component={Festival} />
-      <Route path="/course" component={Course} />
-      <Route path="/eatery" component={Eatery} />
-      <Route path="/acc" component={ACC} />
-      <Route path="/error" exact component={ERROR} />
-      <Route path="/" exact component={HOME} />
-      <Redirect from="*" to="error" />
-    </Switch>
-  </Router>
-);
+export default () => {
+  return (
+    <Router>
+      {window.location.href.split("/")[3] !== "detail" && <Header />}
+      <Switch>
+        <Route path="/spot" component={Spot} />
+        <Route path="/festival" component={Festival} />
+        <Route path="/course" component={Course} />
+        <Route path="/eatery" component={Eatery} />
+        <Route path="/acc" component={ACC} />
+        <Route path="/detail/:contentId/:itemNo" component={Detail} />
+        <Route path="/error" exact component={ERROR} />
+        <Route path="/" exact component={HOME} />
+        <Redirect from="*" to="error" />
+      </Switch>
+    </Router>
+  );
+};

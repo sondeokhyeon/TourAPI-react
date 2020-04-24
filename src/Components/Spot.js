@@ -1,15 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CONTAINER, CONTENTS } from "../Style/GlobalStyles";
+import styled from "styled-components";
+import {
+  CONTAINER,
+  CONTENTS,
+  MAIN_TITLE,
+  SUB_TITLE,
+} from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
 import {
-  getSpotList,
+  getMajorList,
   getMinorList,
   useDataState,
   useDataDispatch,
 } from "../Common/Store";
-import AreaList from "./AreaList";
+import AreaList from "../Common/AreaList";
 import "../Style/spot.scss";
-import noImage from "../images/noimage.jpg";
+import DetailList from "../Common/DetailList";
+
+const MORE_BTN = styled.span`
+  margin-top: 25px;
+  cursor: pointer;
+  display: block;
+  float: right;
+  margin-right: 130px;
+`;
 
 export default () => {
   const state = useDataState();
@@ -25,7 +39,10 @@ export default () => {
   const param = `contentTypeId=12&areaCode=${areaCode}&sigunguCode=${minorCode}&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=24&pageNo=`;
 
   useEffect(() => {
-    getSpotList(dispatch, null, { param: param + pageNo.current });
+    getMajorList(dispatch, null, {
+      major: "areaBasedList",
+      param: param + pageNo.current,
+    });
   }, [dispatch, pageNo, param]);
 
   const { loading, data, error } = state;
@@ -34,7 +51,8 @@ export default () => {
   if (!data) return null;
 
   const getData = async () => {
-    await getSpotList(dispatch, data.info, {
+    await getMajorList(dispatch, data.info, {
+      major: "areaBasedList",
       param: param + (pageNo.current += 1),
     });
     await window.scroll({
@@ -46,11 +64,11 @@ export default () => {
   return (
     <CONTENTS id="container">
       <CONTAINER>
-        <h1>관광지</h1>
+        <MAIN_TITLE>관광지</MAIN_TITLE>
+        <SUB_TITLE>{major}</SUB_TITLE>
         <AreaList
           areaCode={areaCode}
           setAreaCode={setAreaCode}
-          major={major}
           setMajor={setMajor}
           minor={data.minor}
           setMinorCode={setMinorCode}
@@ -65,41 +83,18 @@ export default () => {
           pageNo={pageNo}
         />
         <div className="container">
-          {data.info && <DetailView item={data.info} />}
+          {data.info && <DetailList item={data.info} />}
         </div>
         {data.info.length >= 24 && data.info[data.info.length - 1] && (
-          <button
+          <MORE_BTN
             onClick={() => {
               getData();
             }}
           >
             더보기
-          </button>
+          </MORE_BTN>
         )}
       </CONTAINER>
     </CONTENTS>
   );
-};
-
-const DetailView = ({ item }) => {
-  if (item.length === 0) {
-    return null;
-  } else if (item[0] === undefined) {
-    return <span>에러가 발생하였습니다</span>;
-  } else {
-    return item.map((i, index) => {
-      if (i)
-        return (
-          <div key={index} className="tinfo">
-            <img
-              className="infoimg"
-              src={i.firstimage ? i.firstimage : noImage}
-              alt={i.title}
-            />
-            <div className="infoTitle">{i.title}</div>
-            <div className="infoAddr">{i.addr1}</div>
-          </div>
-        );
-    });
-  }
 };

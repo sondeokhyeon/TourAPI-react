@@ -17,18 +17,24 @@ export const CONTAINER = styled.div`
   & h1 {
     font-size: 3rem;
     font-weight: bold;
-    padding-left: 20px;
+    padding-left: 10px;
   }
   & h2 {
     font-size: 2rem;
     font-weight: bold;
-    padding-left: 20px;
+    padding-left: 10px;
   }
   & h3 {
     font-size: 1rem;
     font-weight: bold;
-    padding-left: 20px;
+    padding-left: 10px;
   }
 `;
+
+export const MAIN_TITLE = styled.h1`
+  padding-bottom: 20px;
+`;
+
+export const SUB_TITLE = styled.h2``;
 
 export default GlobalStyle;
