@@ -6,8 +6,9 @@ const Detail = ({ match }) => {
   const {
     params: { contentId, itemNo },
   } = match;
-  //const [state] = useAsync(getDetailInfo, { contentId, itemNo }, false);
-  console.log(getDetailInfo(contentId, itemNo));
+  const [state] = useAsync(getDetailInfo, { contentId, itemNo }, true);
+  const { loading, data, error } = state;
+  console.log(loading, data, error);
   return <div>DETAIL</div>;
 };
 

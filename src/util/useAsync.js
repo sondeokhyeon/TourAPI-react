@@ -1,30 +1,28 @@
-import { useReducer, useEffect, useCallback } from "react";
+import { useReducer, useEffect } from "react";
 import { asyncReducer } from "../util/asyncReducer";
 
-function useAsync(callback, dept = "", flag) {
+function useAsync(callback, deps = "", skip = false) {
   const [state, dispatch] = useReducer(asyncReducer, {
     loading: false,
     data: null,
     error: null,
   });
-
-  const fetchData = useCallback(async () => {
+  //es
+  const fetchData = async () => {
+    dispatch({ type: "LOADING" });
     try {
-      dispatch({ type: "LOADING" });
-      const response = await callback(dept);
-      dispatch({ type: "SUCCESS", data: { response } });
+      const response = await callback(deps);
+      dispatch({ type: "SUCCESS", data: response });
     } catch (err) {
       console.log(err);
       dispatch({ type: "ERROR", error: err });
     }
-  }, [callback, dept]);
+  };
 
   useEffect(() => {
-    if (flag === true) {
-      return;
-    }
-    fetchData();
-  }, [fetchData, flag]);
+    skip !== false && fetchData();
+    // eslint-disable-next-line
+  }, [skip]);
 
   return [state, fetchData];
 }
