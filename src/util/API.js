@@ -20,7 +20,10 @@ export async function getDetailInfo(arg) {
   const url = `contentTypeId=${itemNo}&contentId=${contentId}&MobileOS=ETC&MobileApp=AppTest&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y`;
   const id_info = `https://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=%2B6kreK3SlK%2FHeXSglkdHXVcOjgM%2BHoHwQK%2BbDXAlMNTwbkNSgJXPlywyo7CO1ntAZ5CDfYU4xFI1p%2F9TJ3fbFw%3D%3D&${url}`;
   const item_info = `https://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=%2B6kreK3SlK%2FHeXSglkdHXVcOjgM%2BHoHwQK%2BbDXAlMNTwbkNSgJXPlywyo7CO1ntAZ5CDfYU4xFI1p%2F9TJ3fbFw%3D%3D&${url}`;
-  const common = await axios.get(id_info);
+  const info = await axios.get(id_info);
   const intro = await axios.get(item_info);
-  return { common: common.data, intro: intro.data };
+  return {
+    info: info.data.response.body.items.item,
+    intro: intro.data.response.body.items.item,
+  };
 }

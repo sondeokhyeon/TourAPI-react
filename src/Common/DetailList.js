@@ -46,7 +46,6 @@ const DetailList = ({ item }) => {
     return <div>정보가 없습니다</div>;
   } else {
     return item.map((i, index) => {
-      console.log(i);
       return (
         i && (
           <Link
