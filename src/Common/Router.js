@@ -13,19 +13,17 @@ import Eatery from "../Components/Eatery";
 import ACC from "../Components/Accommodations";
 import ERROR from "../Common/Error";
 import Header from "../Common/Header";
-import Detail from "../Common/Detail";
 
 export default () => {
   return (
     <Router>
-      {window.location.href.split("/")[3] !== "detail" && <Header />}
+      <Header />
       <Switch>
         <Route path="/spot" component={Spot} />
         <Route path="/festival" component={Festival} />
         <Route path="/course" component={Course} />
         <Route path="/eatery" component={Eatery} />
         <Route path="/acc" component={ACC} />
-        <Route path="/detail/:contentId/:itemNo" component={Detail} />
         <Route path="/error" exact component={ERROR} />
         <Route path="/" exact component={HOME} />
         <Redirect from="*" to="error" />

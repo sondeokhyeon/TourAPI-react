@@ -62,7 +62,7 @@ export default () => {
   };
 
   return (
-    <CONTENTS id="container">
+    <CONTENTS>
       <CONTAINER>
         <MAIN_TITLE>관광지</MAIN_TITLE>
         <SUB_TITLE>{major}</SUB_TITLE>

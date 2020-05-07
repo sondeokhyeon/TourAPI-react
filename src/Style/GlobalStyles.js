@@ -11,7 +11,7 @@ export const CONTENTS = styled.div`
 `;
 
 export const CONTAINER = styled.div`
-  width: 90%;
+  width: 95%;
   padding: 4em 0;
   margin: 0 auto;
   & h1 {

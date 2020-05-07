@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const WRAP = styled.div`
-  position: sticky;
-  height: 90px;
+  height: 100px;
   width: 1194px;
 `;
 const MAJOR = styled.ul`
@@ -21,6 +20,9 @@ const MINOR = styled.select`
   margin-left: 10px;
   margin: 0px 5px 5px 10px;
   float: right;
+  height: 30px;
+  font-size: 20px;
+  width: 130px;
 `;
 
 const AreaList = ({

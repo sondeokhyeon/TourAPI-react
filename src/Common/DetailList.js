@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import noImage from "../images/noimage.jpg";
-import { Link } from "react-router-dom";
 
 const T_INFO = styled.div`
   display: inline-block;
@@ -10,6 +9,7 @@ const T_INFO = styled.div`
   height: 300px;
   margin: 10px;
   box-sizing: border-box;
+  cursor: pointer;
 `;
 
 const T_IMG = styled.img`
@@ -48,20 +48,16 @@ const DetailList = ({ item }) => {
     return item.map((i, index) => {
       return (
         i && (
-          <Link
-            to={`detail/${i.contentid}/${i.contenttypeid}`}
-            target="_blank"
+          <T_INFO
             key={index}
+            onClick={() => {
+              console.log(`${i.contentid}/${i.contenttypeid}`);
+            }}
           >
-            <T_INFO>
-              <T_IMG
-                src={i.firstimage ? i.firstimage : noImage}
-                alt={i.title}
-              />
-              <T_TITLE>{i.title}</T_TITLE>
-              <T_ADDR>{i.addr1}</T_ADDR>
-            </T_INFO>
-          </Link>
+            <T_IMG src={i.firstimage ? i.firstimage : noImage} alt={i.title} />
+            <T_TITLE>{i.title}</T_TITLE>
+            <T_ADDR>{i.addr1}</T_ADDR>
+          </T_INFO>
         )
       );
     });
