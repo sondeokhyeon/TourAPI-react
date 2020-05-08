@@ -16,6 +16,7 @@ import {
 import AreaList from "../Common/AreaList";
 import "../Style/spot.scss";
 import DetailList from "../Common/DetailList";
+import Detail from "../Common/Detail";
 
 const MORE_BTN = styled.span`
   margin-top: 25px;
@@ -25,6 +26,17 @@ const MORE_BTN = styled.span`
   margin-right: 130px;
 `;
 
+// const MODAL_CONTAINER = styled.div`
+//   position: fixed;
+//   color: white;
+//   background-color: #0000003d;
+//   width: 100%;
+//   height: 100%;
+//   left: 50%;
+//   top: 50%;
+//   transform: translate(-50%, -50%);
+// `;
+
 export default () => {
   const state = useDataState();
   const dispatch = useDataDispatch();
@@ -33,6 +45,7 @@ export default () => {
   const [major, setMajor] = useState("전체");
   const [minorDisplay, setMinorDisplay] = useState("none");
   const [minorCode, setMinorCode] = useState("");
+  const [detailInfo, setDetailInfo] = useState(false);
 
   const height = useRef(1920);
   const pageNo = useRef(1);
@@ -60,10 +73,12 @@ export default () => {
     });
     height.current += 1920;
   };
-
   return (
     <CONTENTS>
       <CONTAINER>
+        {detailInfo !== false && (
+          <Detail detailInfo={detailInfo} setDetailInfo={setDetailInfo} />
+        )}
         <MAIN_TITLE>관광지</MAIN_TITLE>
         <SUB_TITLE>{major}</SUB_TITLE>
         <AreaList
@@ -83,7 +98,9 @@ export default () => {
           pageNo={pageNo}
         />
         <div className="container">
-          {data.info && <DetailList item={data.info} />}
+          {data.info && (
+            <DetailList item={data.info} setDetailInfo={setDetailInfo} />
+          )}
         </div>
         {data.info.length >= 24 && data.info[data.info.length - 1] && (
           <MORE_BTN

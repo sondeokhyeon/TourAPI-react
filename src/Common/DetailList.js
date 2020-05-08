@@ -39,7 +39,7 @@ const T_ADDR = styled.div`
   white-space: nowrap;
 `;
 
-const DetailList = ({ item }) => {
+const DetailList = ({ item, setDetailInfo }) => {
   if (item.length === 0) {
     return null;
   } else if (item[0] === undefined) {
@@ -51,7 +51,9 @@ const DetailList = ({ item }) => {
           <T_INFO
             key={index}
             onClick={() => {
-              console.log(`${i.contentid}/${i.contenttypeid}`);
+              //console.log(`${i.contentid}/${i.contenttypeid}`);
+              //<Detail />
+              setDetailInfo(`${i.contentid}/${i.contenttypeid}`);
             }}
           >
             <T_IMG src={i.firstimage ? i.firstimage : noImage} alt={i.title} />
