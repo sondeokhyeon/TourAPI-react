@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const WRAP = styled.div`
-  height: 100px;
+  position: relative;
   width: 1194px;
 `;
 const MAJOR = styled.ul`
@@ -18,16 +18,18 @@ const MAJOR = styled.ul`
 const MINOR = styled.select`
   display: ${(props) => props.display};
   margin-left: 10px;
-  margin: 0px 5px 5px 10px;
-  float: right;
   height: 30px;
   font-size: 20px;
   width: 130px;
+  position: absolute;
+  bottom: 65px;
+  left: 110px;
 `;
 
 const AreaList = ({
   areaCode,
   setAreaCode,
+  major,
   setMajor,
   minor,
   setMinorDisplay,
@@ -99,7 +101,7 @@ const AreaList = ({
         }}
         value={minorCode}
       >
-        <option value="">전체</option>
+        <option value="">{major} 전체</option>
         {minor.map((item, index) => (
           <option key={index} value={item.code}>
             {item.name}

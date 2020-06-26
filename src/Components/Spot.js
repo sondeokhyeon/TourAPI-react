@@ -26,16 +26,12 @@ const MORE_BTN = styled.span`
   margin-right: 130px;
 `;
 
-// const MODAL_CONTAINER = styled.div`
-//   position: fixed;
-//   color: white;
-//   background-color: #0000003d;
-//   width: 100%;
-//   height: 100%;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
-// `;
+const CONT_HEADER = styled.div`
+  position: sticky;
+  top: 0;
+  background: white;
+  padding-top: 10px;
+`;
 
 export default () => {
   const state = useDataState();
@@ -76,32 +72,36 @@ export default () => {
   return (
     <CONTENTS>
       <CONTAINER>
-        {detailInfo !== false && (
-          <Detail detailInfo={detailInfo} setDetailInfo={setDetailInfo} />
-        )}
         <MAIN_TITLE>관광지</MAIN_TITLE>
-        <SUB_TITLE>{major}</SUB_TITLE>
-        <AreaList
-          areaCode={areaCode}
-          setAreaCode={setAreaCode}
-          setMajor={setMajor}
-          minor={data.minor}
-          setMinorCode={setMinorCode}
-          minorCode={minorCode}
-          minorDisplay={minorDisplay}
-          setMinorDisplay={setMinorDisplay}
-          getMinor={(no) => {
-            getMinorList(dispatch, null, {
-              param: "numOfRows=50&MobileOS=ETC&MobileApp=test&areaCode=" + no,
-            });
-          }}
-          pageNo={pageNo}
-        />
+        <CONT_HEADER>
+          <SUB_TITLE>{major}</SUB_TITLE>
+          <AreaList
+            areaCode={areaCode}
+            setAreaCode={setAreaCode}
+            major={major}
+            setMajor={setMajor}
+            minor={data.minor}
+            setMinorCode={setMinorCode}
+            minorCode={minorCode}
+            minorDisplay={minorDisplay}
+            setMinorDisplay={setMinorDisplay}
+            getMinor={(no) => {
+              getMinorList(dispatch, null, {
+                param:
+                  "numOfRows=50&MobileOS=ETC&MobileApp=test&areaCode=" + no,
+              });
+            }}
+            pageNo={pageNo}
+          />
+        </CONT_HEADER>
         <div className="container">
           {data.info && (
             <DetailList item={data.info} setDetailInfo={setDetailInfo} />
           )}
         </div>
+        {detailInfo !== false && (
+          <Detail detailInfo={detailInfo} setDetailInfo={setDetailInfo} />
+        )}
         {data.info.length >= 24 && data.info[data.info.length - 1] && (
           <MORE_BTN
             onClick={() => {
