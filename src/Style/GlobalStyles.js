@@ -7,7 +7,12 @@ const GlobalStyle = createGlobalStyle`
 
 export const CONTENTS = styled.div`
   float: right;
-  width: 85%;
+  width: 80%;
+  margin-left: 20%;
+  @media only screen and (min-width: 300px) and (max-width: 600px) {
+    margin: 0px;
+    width: 95%;
+  }
 `;
 
 export const CONTAINER = styled.div`
