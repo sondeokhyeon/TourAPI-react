@@ -2,6 +2,7 @@ import React from "react";
 import useAsync from "../util/useAsync";
 import styled from "styled-components";
 import { getDetailInfo } from "../util/API";
+import noImage from "../images/noimage.jpg";
 //import LOADING from "../Common/Loading";
 
 const MODAL_CONTAINER = styled.div`
@@ -55,7 +56,7 @@ const Detail = ({ detailInfo, setDetailInfo }) => {
 function INFO_DETAIL({ info }) {
   return (
     <>
-      <img src={info.firstimage} alt={info.title} />
+      <img src={info.firstimage ? info.firstimage : noImage} alt={info.title} />
       <h1>{info.title}</h1>
       <div>{info.addr1}</div>
       <div dangerouslySetInnerHTML={{ __html: info.overview }} />
