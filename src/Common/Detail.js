@@ -26,6 +26,9 @@ const INNER_CONTAINER = styled.div`
   width: 50%;
   height: 800px;
   overflow: auto;
+  @media screen and (min-width: 300px) and (max-width: 1290px) {
+    width: 100%;
+  }
 `;
 
 const Detail = ({ detailInfo, setDetailInfo }) => {
@@ -47,19 +50,40 @@ const Detail = ({ detailInfo, setDetailInfo }) => {
       <INNER_CONTAINER>
         <INFO_DETAIL info={data.info} />
         <INTRO_DETAIL intro={data.intro} />
-        <button onClick={closeModal}>CLOSE</button>
       </INNER_CONTAINER>
+      <button onClick={closeModal}>CLOSE</button>
     </MODAL_CONTAINER>
   );
 };
 
+const IMG = styled.img`
+  @media screen and (min-width: 300px) and (max-width: 1290px) {
+    width: 100%;
+  }
+`;
+const TITLE = styled.h1`
+  margin: 25px 0px;
+`;
+const ADDR = styled.div``;
+const DESCIPTION = styled.div`
+  width: 95%;
+  padding: 10px 50px;
+  p {
+    font-size: 15px;
+    word-break: keep-all;
+    line-height: 2;
+  }
+`;
+
 function INFO_DETAIL({ info }) {
   return (
     <>
-      <img src={info.firstimage ? info.firstimage : noImage} alt={info.title} />
-      <h1>{info.title}</h1>
-      <div>{info.addr1}</div>
-      <div dangerouslySetInnerHTML={{ __html: info.overview }} />
+      <IMG src={info.firstimage ? info.firstimage : noImage} alt={info.title} />
+      <TITLE>{info.title}</TITLE>
+      <ADDR>{info.addr1}</ADDR>
+      <DESCIPTION>
+        <p dangerouslySetInnerHTML={{ __html: info.overview }}></p>
+      </DESCIPTION>
     </>
   );
 }

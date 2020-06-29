@@ -3,15 +3,28 @@ import styled from "styled-components";
 
 const WRAP = styled.div`
   position: relative;
-  width: 1194px;
+  margin-bottom: 10px;
+  /* width: 1198px; */
+  @media screen and (min-width: 300px) and (max-width: 800px) {
+    display: flex;
+    width: 100%;
+  }
 `;
 const MAJOR = styled.ul`
+  @media screen and (min-width: 300px) and (max-width: 800px) {
+    margin: 20px 0px;
+  }
   & li {
     display: inline-block;
     cursor: pointer;
     padding: 13px 5px 13px 10px;
     margin: 10px 0px;
     font-size: 1.2rem;
+    @media only screen and (min-width: 300px) and (max-width: 800px) {
+      padding: 1px 5px 13px 10px;
+      margin: 2px 0px;
+      display: none;
+    }
   }
 `;
 
@@ -22,8 +35,27 @@ const MINOR = styled.select`
   font-size: 20px;
   width: 130px;
   position: absolute;
-  bottom: 65px;
-  left: 110px;
+  bottom: 66px;
+  left: 130px;
+  @media screen and (min-width: 300px) and (max-width: 800px) {
+    bottom: 38px;
+    position: static;
+  }
+  @media screen and (min-width: 800px) and (max-width: 1290px) {
+    bottom: 128px;
+  }
+`;
+
+const M_MINOR = styled.select`
+  display: none;
+
+  @media screen and (min-width: 300px) and (max-width: 800px) {
+    display: block;
+    margin-left: 10px;
+    height: 30px;
+    font-size: 20px;
+    width: 100px;
+  }
 `;
 
 const AreaList = ({
@@ -93,9 +125,37 @@ const AreaList = ({
         <li onClick={() => changeAction("6", "부산")}>부산</li>
         <li onClick={() => changeAction("39", "제주도")}>제주도</li>
       </MAJOR>
+      <M_MINOR
+        onChange={(e) => {
+          const index = e.target.selectedIndex;
+          const options = e.target.childNodes[index];
+          changeAction(e.target.value, options.label);
+        }}
+        value={major}
+      >
+        <option value="">{major}</option>
+        <option value="1">서울</option>
+        <option value="31">경기도</option>
+        <option value="2">인천</option>
+        <option value="32">강원도</option>
+        <option value="8">세종시</option>
+        <option value="3">대전</option>
+        <option value="33">충북</option>
+        <option value="34">충남</option>
+        <option value="4">대구</option>
+        <option value="37">전북</option>
+        <option value="38">전남</option>
+        <option value="5">광주</option>
+        <option value="35">경북</option>
+        <option value="36">경남</option>
+        <option value="7">울산</option>
+        <option value="6">부산</option>
+        <option value="39">제주도</option>
+      </M_MINOR>
       <MINOR
         display={minorDisplay}
         onChange={(e) => {
+          console.log(e.target);
           pageNo.current = 1;
           setMinorCode(e.target.value);
         }}

@@ -11,7 +11,7 @@ export const CONTENTS = styled.div`
   margin-left: 20%;
   @media only screen and (min-width: 300px) and (max-width: 600px) {
     margin: 0px;
-    width: 95%;
+    width: 100%;
   }
 `;
 
@@ -34,12 +34,19 @@ export const CONTAINER = styled.div`
     font-weight: bold;
     padding-left: 10px;
   }
+  @media only screen and (min-width: 300px) and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 export const MAIN_TITLE = styled.h1`
   padding-bottom: 20px;
 `;
 
-export const SUB_TITLE = styled.h2``;
+export const SUB_TITLE = styled.h2`
+  @media only screen and (min-width: 300px) and (max-width: 800px) {
+    display: none;
+  }
+`;
 
 export default GlobalStyle;
