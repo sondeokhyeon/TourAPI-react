@@ -21,26 +21,56 @@ const HEADER = styled.header`
 `;
 
 const UL = styled.ul`
-  margin: 200px auto;
+  margin: 50px auto;
   height: 450px;
   @media only screen and (min-width: 300px) and (max-width: 600px) {
     margin: 0 auto;
-    height: 260px;
+    height: 222px;
     background-color: white;
   }
 `;
 
 const LI = styled.li`
-  margin: 20px auto;
+  padding: 10px 0;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: gainsboro;
+  }
   & a {
+    color: #383838;
+    font-weight: 600;
     display: block;
     text-align: center;
     text-decoration: none;
+    font-size: 17px;
+    line-height: 2.3;
   }
   @media only screen and (min-width: 300px) and (max-width: 600px) {
     border-bottom: 1px solid #ddd;
     padding: 10px 0px;
     margin: 0px;
+    & a {
+      line-height: 1;
+      font-size: 16px;
+    }
+  }
+`;
+
+const HOME_BTN = styled(NavLink)`
+  background: red;
+  width: 30px;
+  display: block;
+  border-radius: 100px;
+  padding: 60px;
+  font-size: 21px;
+  color: white;
+  text-decoration: none;
+  margin: 50px auto;
+  font-weight: 600;
+  ${({ theme }) => theme.mobile(`display:none;`)}
+  & span {
+    position: relative;
+    right: 7px;
   }
 `;
 
@@ -56,17 +86,17 @@ const BTN_WRAP = styled.div`
 const BTN = styled.button``;
 
 export default () => {
-  const [height, setHeight] = useState("-259px");
+  const [height, setHeight] = useState("-222px");
 
   return (
     <>
       <HEADER height={height}>
+        <div>
+          <HOME_BTN to="/" exact>
+            <span>INFO</span>
+          </HOME_BTN>
+        </div>
         <UL>
-          <LI>
-            <NavLink to="/" exact>
-              Home
-            </NavLink>
-          </LI>
           <LI>
             <NavLink to="/spot">관광지</NavLink>
           </LI>
@@ -88,7 +118,7 @@ export default () => {
           <BTN_WRAP>
             <BTN
               onClick={() => {
-                setHeight(height !== "0px" ? "0px" : "-260px");
+                setHeight(height !== "0px" ? "0px" : "-222px");
               }}
             >
               버튼
