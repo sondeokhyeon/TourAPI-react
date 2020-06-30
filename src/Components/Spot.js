@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
 import {
   CONTAINER,
   CONTENTS,
   MAIN_TITLE,
   SUB_TITLE,
+  CONT_HEADER,
+  MORE_BTN,
 } from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
 import {
@@ -17,21 +18,6 @@ import AreaList from "../Common/AreaList";
 import "../Style/spot.scss";
 import DetailList from "../Common/DetailList";
 import Detail from "../Common/Detail";
-
-const MORE_BTN = styled.span`
-  margin-top: 25px;
-  cursor: pointer;
-  display: block;
-  float: right;
-  margin-right: 130px;
-`;
-
-const CONT_HEADER = styled.div`
-  position: sticky;
-  top: 0;
-  background: white;
-  padding-top: 10px;
-`;
 
 export default () => {
   const state = useDataState();

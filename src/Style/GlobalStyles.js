@@ -39,6 +39,21 @@ export const CONTAINER = styled.div`
   }
 `;
 
+export const MORE_BTN = styled.span`
+  margin-top: 25px;
+  cursor: pointer;
+  display: block;
+  float: right;
+  margin-right: 130px;
+`;
+
+export const CONT_HEADER = styled.div`
+  position: sticky;
+  top: 0;
+  background: white;
+  padding-top: 10px;
+`;
+
 export const MAIN_TITLE = styled.h1`
   padding-bottom: 20px;
 `;
