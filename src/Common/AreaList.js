@@ -4,27 +4,28 @@ import styled from "styled-components";
 const WRAP = styled.div`
   position: relative;
   margin-bottom: 10px;
-  /* width: 1198px; */
-  @media screen and (min-width: 300px) and (max-width: 800px) {
+  ${({ theme }) =>
+    theme.mobile(`
     display: flex;
     width: 100%;
-  }
+  `)}
 `;
 const MAJOR = styled.ul`
-  @media screen and (min-width: 300px) and (max-width: 800px) {
-    margin: 20px 0px;
-  }
+  ${({ theme }) => theme.mobile(`margin: 20px 0px;`)}
   & li {
     display: inline-block;
     cursor: pointer;
     padding: 13px 5px 13px 10px;
     margin: 10px 0px;
     font-size: 1.2rem;
-    @media only screen and (min-width: 300px) and (max-width: 800px) {
-      padding: 1px 5px 13px 10px;
-      margin: 2px 0px;
-      display: none;
-    }
+    ${({ theme }) =>
+      theme.mobile(
+        `
+         padding: 1px 5px 13px 10px;
+         margin: 2px 0px;
+         display: none;
+        `
+      )}
   }
 `;
 
