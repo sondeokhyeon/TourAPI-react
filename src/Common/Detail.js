@@ -28,6 +28,8 @@ const INNER_CONTAINER = styled.div`
   overflow: auto;
   @media screen and (min-width: 300px) and (max-width: 1290px) {
     width: 100%;
+    height: 90%;
+    justify-content: start;
   }
 `;
 
@@ -58,17 +60,20 @@ const Detail = ({ detailInfo, setDetailInfo }) => {
 
 const IMG = styled.img`
   @media screen and (min-width: 300px) and (max-width: 1290px) {
-    width: 100%;
+    width: 95%;
   }
 `;
 const TITLE = styled.h1`
   margin: 25px 0px;
 `;
+
 const ADDR = styled.div``;
+
 const DESCIPTION = styled.div`
+  margin-top: 25px;
   width: 95%;
-  padding: 10px 50px;
   p {
+    padding: 10px 15px;
     font-size: 15px;
     word-break: keep-all;
     line-height: 2;
@@ -80,7 +85,7 @@ function INFO_DETAIL({ info }) {
     <>
       <IMG src={info.firstimage ? info.firstimage : noImage} alt={info.title} />
       <TITLE>{info.title}</TITLE>
-      <ADDR>{info.addr1}</ADDR>
+      <ADDR> 주소 : {info.addr1}</ADDR>
       <DESCIPTION>
         <p dangerouslySetInnerHTML={{ __html: info.overview }}></p>
       </DESCIPTION>

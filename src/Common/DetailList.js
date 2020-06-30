@@ -5,7 +5,7 @@ import noImage from "../images/noimage.jpg";
 const T_INFO = styled.div`
   display: inline-block;
   border: 1px solid #d9d9d9;
-  width: 280px;
+  width: 250px;
   height: 300px;
   margin: 10px;
   box-sizing: border-box;
