@@ -7,9 +7,16 @@ const T_INFO = styled.div`
   border: 1px solid #d9d9d9;
   width: 250px;
   height: 300px;
-  margin: 10px;
+  margin: 10px; 
   box-sizing: border-box;
   cursor: pointer;
+  ${({theme}) => theme.mobile(
+    `
+      width: 95%;
+      height: 300px;
+      margin: 20px 10px;
+    `
+  )}
 `;
 
 const T_IMG = styled.img`
@@ -17,6 +24,11 @@ const T_IMG = styled.img`
   height: 200px;
   border-bottom: 1px solid #dbdbdb;
   box-sizing: border-box;
+  ${({theme}) => theme.mobile(
+    `
+      height: 225px;
+    `
+  )}
 `;
 
 const T_TITLE = styled.div`

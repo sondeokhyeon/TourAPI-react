@@ -75,11 +75,11 @@ const HOME_BTN = styled(NavLink)`
 `;
 
 const BTN_WRAP = styled.div`
-  text-align: right;
   margin: 15px;
   display: none;
   @media only screen and (min-width: 300px) and (max-width: 600px) {
-    display: block;
+    display: inline;
+    float:right;
   }
 `;
 

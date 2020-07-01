@@ -32,7 +32,7 @@ export default () => {
 
   const height = useRef(1920);
   const pageNo = useRef(1);
-  const today = moment().format("YYYY-MM") + "-01";
+  const today = moment().format("YYYYMM") + "01";
   const param = `contentTypeId=12&areaCode=${areaCode}&sigunguCode=${minorCode}&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=AppTest&arrange=A&numOfRows=24&eventStartDate=${today}&pageNo=`;
 
   useEffect(() => {
@@ -58,11 +58,10 @@ export default () => {
     });
     height.current += 1920;
   };
-
   return (
     <CONTENTS>
       <CONTAINER>
-        <MAIN_TITLE>{today.split("-")[1]}월 축제 행사</MAIN_TITLE>
+        <MAIN_TITLE>{today.substring(6,4)}월 축제 행사</MAIN_TITLE>
         <CONT_HEADER>
           <SUB_TITLE>{major}</SUB_TITLE>
           <AreaList

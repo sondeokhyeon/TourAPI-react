@@ -18,7 +18,7 @@ const MODAL_CONTAINER = styled.div`
 const INNER_CONTAINER = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   background-color: white;
   color: black;
@@ -29,8 +29,18 @@ const INNER_CONTAINER = styled.div`
   @media screen and (min-width: 300px) and (max-width: 1290px) {
     width: 100%;
     height: 90%;
-    justify-content: start;
   }
+`;
+
+const BUTTON_WRAP = styled.div`
+  text-align:center;
+`;
+
+const MODAL_SHUTDOWN = styled.div`
+  width:100%;
+  height:100%;
+  position:fixed;
+
 `;
 
 const Detail = ({ detailInfo, setDetailInfo }) => {
@@ -43,26 +53,34 @@ const Detail = ({ detailInfo, setDetailInfo }) => {
     setDetailInfo(false);
   }
 
-  if (loading) return null;
+  if (loading) return <span>Loaindg...</span>;
   if (error)
     return <div>ERROR!(통신 및 원인 불명의 에러가 발생하였습니다.</div>;
-  if (!data) return null;
+  if (!data) return <span>데이터가없습니다</span>;
+
   return (
-    <MODAL_CONTAINER>
+    <MODAL_CONTAINER >
       <INNER_CONTAINER>
         <INFO_DETAIL info={data.info} />
         <INTRO_DETAIL intro={data.intro} />
       </INNER_CONTAINER>
-      <button onClick={closeModal}>CLOSE</button>
+      <BUTTON_WRAP>
+        <button onClick={closeModal}>CLOSE</button>
+      </BUTTON_WRAP>
+      <div>
+        <MODAL_SHUTDOWN onClick={closeModal}></MODAL_SHUTDOWN>
+      </div>
     </MODAL_CONTAINER>
   );
 };
 
 const IMG = styled.img`
+  margin-top:15px;
   @media screen and (min-width: 300px) and (max-width: 1290px) {
     width: 95%;
   }
 `;
+
 const TITLE = styled.h1`
   margin: 25px 0px;
 `;
