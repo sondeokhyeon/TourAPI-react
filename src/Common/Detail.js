@@ -5,14 +5,13 @@ import { getDetailInfo } from "../util/API";
 import noImage from "../images/noimage.jpg";
 //import LOADING from "../Common/Loading";
 
-const MODAL_CONTAINER = styled.div`
+const CONTAINER = styled.div`
   position: fixed;
   background-color: #0000003d;
   width: 100%;
   height: 100%;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  left: 0;
+  top: 0;
 `;
 
 const INNER_CONTAINER = styled.div`
@@ -23,14 +22,29 @@ const INNER_CONTAINER = styled.div`
   background-color: white;
   color: black;
   margin: 3rem auto 0;
-  width: 50%;
+  width: 100%;
   height: 800px;
   overflow: auto;
-  @media screen and (min-width: 300px) and (max-width: 1290px) {
+  ${({theme}) => theme.mobile(
+    `
     width: 100%;
-    height: 90%;
-  }
+    `
+  )}
 `;
+
+const MODAL_CONTAINER = styled.div`
+  position:absolute;
+  width:50%;
+  left:25%;
+  top:0;
+  ${({theme}) => theme.mobile(
+    `
+    width: 100%;
+    left:0;
+    `
+  )}
+`;
+
 
 const BUTTON_WRAP = styled.div`
   text-align:center;
@@ -39,8 +53,6 @@ const BUTTON_WRAP = styled.div`
 const MODAL_SHUTDOWN = styled.div`
   width:100%;
   height:100%;
-  position:fixed;
-
 `;
 
 const Detail = ({ detailInfo, setDetailInfo }) => {
@@ -59,7 +71,9 @@ const Detail = ({ detailInfo, setDetailInfo }) => {
   if (!data) return <span>데이터가없습니다</span>;
 
   return (
-    <MODAL_CONTAINER >
+    <CONTAINER >
+    <MODAL_SHUTDOWN onClick={closeModal}></MODAL_SHUTDOWN>
+      <MODAL_CONTAINER>
       <INNER_CONTAINER>
         <INFO_DETAIL info={data.info} />
         <INTRO_DETAIL intro={data.intro} />
@@ -67,10 +81,8 @@ const Detail = ({ detailInfo, setDetailInfo }) => {
       <BUTTON_WRAP>
         <button onClick={closeModal}>CLOSE</button>
       </BUTTON_WRAP>
-      <div>
-        <MODAL_SHUTDOWN onClick={closeModal}></MODAL_SHUTDOWN>
-      </div>
-    </MODAL_CONTAINER>
+      </MODAL_CONTAINER>
+    </CONTAINER>
   );
 };
 

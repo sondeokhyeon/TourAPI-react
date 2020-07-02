@@ -25,7 +25,7 @@ const UL = styled.ul`
   height: 450px;
   @media only screen and (min-width: 300px) and (max-width: 600px) {
     margin: 0 auto;
-    height: 222px;
+    height: 185px;
     background-color: white;
   }
 `;
@@ -86,7 +86,7 @@ const BTN_WRAP = styled.div`
 const BTN = styled.button``;
 
 export default () => {
-  const [height, setHeight] = useState("-222px");
+  const [height, setHeight] = useState("-185px");
 
   return (
     <>
@@ -98,27 +98,24 @@ export default () => {
         </div>
         <UL>
           <LI>
-            <NavLink to="/spot">관광지</NavLink>
+            <NavLink to="/spot">관광지 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/festival">축제·행사</NavLink>
+            <NavLink to="/festival">축제·행사 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/course">추천 여행코스</NavLink>
+            <NavLink to="/course">추천 여행코스 정보</NavLink>
           </LI>
           <LI>
             <NavLink to="/eatery">음식점 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/acc">숙박업소정보</NavLink>
-          </LI>
-          <LI>
-            <NavLink to="">위치기반</NavLink>
+            <NavLink to="/acc">숙박업소 정보</NavLink>
           </LI>
           <BTN_WRAP>
             <BTN
               onClick={() => {
-                setHeight(height !== "0px" ? "0px" : "-222px");
+                setHeight(height !== "0px" ? "0px" : "-185px");
               }}
             >
               버튼
