@@ -1,8 +1,10 @@
+/* global kakao */
 import React from "react";
 import useAsync from "../util/useAsync";
 import styled from "styled-components";
 import { getDetailInfo } from "../util/API";
-import noImage from "../images/noimage.jpg";
+import noImage from "../images/noimage.jpg"
+//import {Map, Marker} from 'react-kakao-maps'
 //import LOADING from "../Common/Loading";
 
 const CONTAINER = styled.div`
@@ -15,10 +17,10 @@ const CONTAINER = styled.div`
 `;
 
 const INNER_CONTAINER = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: center;
+  align-items: center; */
   background-color: white;
   color: black;
   margin: 3rem auto 0;
@@ -45,7 +47,6 @@ const MODAL_CONTAINER = styled.div`
   )}
 `;
 
-
 const BUTTON_WRAP = styled.div`
   text-align:center;
 `;
@@ -64,18 +65,26 @@ const Detail = ({ detailInfo, setDetailInfo }) => {
   function closeModal() {
     setDetailInfo(false);
   }
+  function setKakaoMap(mapx, mapy) {
+    kakao.maps.load(() => {
+      let container = document.getElementById("map");
+      new window.kakao.maps.Map(container, {
+        center: new kakao.maps.LatLng(mapy, mapx),
+      });
+    });
+  }
 
   if (loading) return <span>Loaindg...</span>;
   if (error)
     return <div>ERROR!(통신 및 원인 불명의 에러가 발생하였습니다.</div>;
   if (!data) return <span>데이터가없습니다</span>;
-
+  
   return (
     <CONTAINER >
     <MODAL_SHUTDOWN onClick={closeModal}></MODAL_SHUTDOWN>
       <MODAL_CONTAINER>
       <INNER_CONTAINER>
-        <INFO_DETAIL info={data.info} />
+        <INFO_DETAIL info={data.info} setKakaoMap={setKakaoMap} />
         <INTRO_DETAIL intro={data.intro} />
       </INNER_CONTAINER>
       <BUTTON_WRAP>
@@ -95,6 +104,7 @@ const IMG = styled.img`
 
 const TITLE = styled.h1`
   margin: 25px 0px;
+  font-size:2rem !important
 `;
 
 const ADDR = styled.div``;
@@ -110,12 +120,19 @@ const DESCIPTION = styled.div`
   }
 `;
 
-function INFO_DETAIL({ info }) {
+const INFO_MAP = styled.div`
+  width:300px;
+  height:300px;
+`;
+
+function INFO_DETAIL({ info, setKakaoMap}) {
   return (
     <>
       <IMG src={info.firstimage ? info.firstimage : noImage} alt={info.title} />
       <TITLE>{info.title}</TITLE>
-      <ADDR> 주소 : {info.addr1}</ADDR>
+      <ADDR> 주소 : {info.addr1} </ADDR>
+      <INFO_MAP id="map" ></INFO_MAP>
+      {setKakaoMap(info.mapx, info.mapy)}
       <DESCIPTION>
         <p dangerouslySetInnerHTML={{ __html: info.overview }}></p>
       </DESCIPTION>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
@@ -87,6 +87,14 @@ const BTN = styled.button``;
 
 export default () => {
   const [height, setHeight] = useState("-185px");
+
+  
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = process.env.REACT_APP_KAKAO_URL
+    script.async = true;
+    document.body.appendChild(script)
+  },[])
 
   return (
     <>
