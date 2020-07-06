@@ -78,4 +78,4 @@ const DetailList = ({ item, setDetailInfo }) => {
   }
 };
 
-export default DetailList;
+export default React.memo(DetailList);
