@@ -85,10 +85,9 @@ const BTN_WRAP = styled.div`
 
 const BTN = styled.button``;
 
-export default () => {
+const Header = () => {
   const [height, setHeight] = useState("-185px");
 
-  
   useEffect(() => {
     const script = document.createElement('script')
     script.src = process.env.REACT_APP_KAKAO_URL
@@ -134,3 +133,5 @@ export default () => {
     </>
   );
 };
+
+export default React.memo(Header);

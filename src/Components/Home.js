@@ -28,7 +28,7 @@ const MENU = ({ item }) => {
   );
 };
 
-export default () => {
+export default React.memo(() => {
   return (
     <CONTENTS>
       <CONTAINER>
@@ -41,7 +41,7 @@ export default () => {
       </CONTAINER>
     </CONTENTS>
   );
-};
+});
 
 const items = [
   {

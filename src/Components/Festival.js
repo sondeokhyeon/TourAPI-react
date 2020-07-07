@@ -19,7 +19,7 @@ import DetailList from "../Common/DetailList";
 import AreaList from "../Common/AreaList";
 import Detail from "../Common/Detail";
 
-export default () => {
+export default React.memo(() => {
   const state = useDataState();
   const dispatch = useDataDispatch();
 
@@ -103,4 +103,4 @@ export default () => {
       </CONTAINER>
     </CONTENTS>
   );
-};
+});
