@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { headerContext } from "../App";
 
 const HEADER = styled.header`
   width: 20%;
@@ -15,7 +16,7 @@ const HEADER = styled.header`
     position: fixed;
     width: 100%;
     z-index: 10;
-    top: ${(props) => props.height};
+    top: ${(props) => props.height}; 
     transition: top 0.5s;
   }
 `;
@@ -75,29 +76,33 @@ const HOME_BTN = styled(NavLink)`
 `;
 
 const BTN_WRAP = styled.div`
-  margin: 15px;
   display: none;
   @media only screen and (min-width: 300px) and (max-width: 600px) {
     display: inline;
     float:right;
+    background-color:white;
   }
 `;
 
-const BTN = styled.button``;
+const BTN = styled.div`
+  margin:15px;
+  /* color:white; */
+`;
 
 const Header = () => {
-  const [height, setHeight] = useState("-185px");
-
+  const {headerDispatch, DATA} = useContext(headerContext);
+  
   useEffect(() => {
+    headerDispatch({type:"INIT"})
     const script = document.createElement('script')
     script.src = process.env.REACT_APP_KAKAO_URL
     script.async = true;
     document.body.appendChild(script)
-  },[])
+  }, [headerDispatch])
 
   return (
     <>
-      <HEADER height={height}>
+      <HEADER height={DATA}>
         <div>
           <HOME_BTN to="/" exact>
             <span>INFO</span>
@@ -105,27 +110,27 @@ const Header = () => {
         </div>
         <UL>
           <LI>
-            <NavLink to="/spot">관광지 정보</NavLink>
+           <NavLink to="/spot">관광지 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/festival">축제·행사 정보</NavLink>
+            <NavLink to="/festival"  >축제·행사 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/course">추천 여행코스 정보</NavLink>
+            <NavLink to="/course"  >추천 여행코스 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/eatery">음식점 정보</NavLink>
+            <NavLink to="/eatery"   >음식점 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/acc">숙박업소 정보</NavLink>
+            <NavLink to="/acc" >숙박업소 정보</NavLink>
           </LI>
           <BTN_WRAP>
             <BTN
-              onClick={() => {
-                setHeight(height !== "0px" ? "0px" : "-185px");
-              }}
+              onClick={() => headerDispatch({
+                 type : 'TOGGLE'
+              })}
             >
-              버튼
+              MENU
             </BTN>
           </BTN_WRAP>
         </UL>
@@ -134,4 +139,4 @@ const Header = () => {
   );
 };
 
-export default React.memo(Header);
+export default Header;
