@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import moment from "moment";
 import {
   useDataState,
@@ -13,17 +13,19 @@ import {
   CONT_HEADER,
   MORE_BTN,
   SUB_TITLE,
+  BACK_DIM,
 } from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
 import DetailList from "../Common/DetailList";
 import AreaList from "../Common/AreaList";
 import Detail from "../Common/Detail";
+import { headerContext } from "../App";
 
 export default React.memo(() => {
   const state = useDataState();
   const dispatch = useDataDispatch();
-
-  //const [today, setToday] = useState(moment().format("MM"));
+  const {headerDispatch, DATA} = useContext(headerContext);
+  
   const [areaCode, setAreaCode] = useState("");
   const [minorCode, setMinorCode] = useState("");
   const [detailInfo, setDetailInfo] = useState(false);
@@ -60,6 +62,9 @@ export default React.memo(() => {
   };
   return (
     <CONTENTS>
+    { DATA === "0px" && <BACK_DIM onClick={() => {
+        headerDispatch({type : 'TOGGLE'});
+      }}/>}
       <CONTAINER>
         <MAIN_TITLE>{today.substring(6,4)}월 축제 행사</MAIN_TITLE>
         <CONT_HEADER>

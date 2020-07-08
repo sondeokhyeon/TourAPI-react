@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import {
   CONTAINER,
   CONTENTS,
@@ -6,6 +6,7 @@ import {
   SUB_TITLE,
   CONT_HEADER,
   MORE_BTN,
+  BACK_DIM
 } from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
 import {
@@ -18,10 +19,12 @@ import AreaList from "../Common/AreaList";
 import "../Style/spot.scss";
 import DetailList from "../Common/DetailList";
 import Detail from "../Common/Detail";
+import { headerContext } from "../App";
 
 export default () => {
   const state = useDataState();
   const dispatch = useDataDispatch();
+  const {headerDispatch, DATA} = useContext(headerContext);
 
   const [areaCode, setAreaCode] = useState("");
   const [major, setMajor] = useState("전체");
@@ -58,9 +61,12 @@ export default () => {
   
   return (
     <CONTENTS>
+      { DATA === "0px" && <BACK_DIM onClick={() => {
+        headerDispatch({type : 'TOGGLE'});
+      }}/>}
       <CONTAINER>
         <MAIN_TITLE>관광지</MAIN_TITLE>
-        <CONT_HEADER>
+        <CONT_HEADER header={DATA}>
           <SUB_TITLE>{major}</SUB_TITLE>
           <AreaList
             areaCode={areaCode}
