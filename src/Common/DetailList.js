@@ -63,8 +63,6 @@ const DetailList = ({ item, setDetailInfo }) => {
           <T_INFO
             key={index}
             onClick={() => {
-              //console.log(`${i.contentid}/${i.contenttypeid}`);
-              //<Detail />
               setDetailInfo(`${i.contentid}/${i.contenttypeid}`);
             }}
           >

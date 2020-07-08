@@ -118,7 +118,7 @@ const TITLE = styled.h1`
 `;
 
 const SUB_TITLE = styled.h2`
-  margin: 25px; 0px;
+  margin: 25px 0px;
   font-size: 1.5rem !important;
   text-align:center;
 `;

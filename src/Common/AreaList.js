@@ -84,27 +84,6 @@ const AreaList = ({
     setMinorCode("");
   };
 
-  // const setDiv = ({ ...minor }, length) => {
-  //   let test = "";
-  //   for (var i = 0; i < length; i++) {
-  //     console.log(minor[i]);
-  //     if (i === 0) test += "<div>";
-  //     test += `<div onClick=${() => test()}>
-  //                ${minor[i].name}
-  //              </div>`;
-  //     if (i % 3 === 0) {
-  //       if (i === 0) {
-  //         continue;
-  //       }
-  //       test += "</div>";
-  //       if (i <= length) {
-  //         test += "<div>";
-  //       }
-  //     }
-  //   }
-  //   return test;
-  // };
-
   return (
     <WRAP>
       <MAJOR>
@@ -156,7 +135,6 @@ const AreaList = ({
       <MINOR
         display={minorDisplay}
         onChange={(e) => {
-          console.log(e.target);
           pageNo.current = 1;
           setMinorCode(e.target.value);
         }}
