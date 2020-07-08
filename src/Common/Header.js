@@ -102,10 +102,6 @@ const Header = () => {
   
   useEffect(() => {
     headerDispatch({type:"INIT"})
-    const script = document.createElement('script')
-    script.src = process.env.REACT_APP_KAKAO_URL
-    script.async = true;
-    document.body.appendChild(script)
   }, [headerDispatch])
 
   return (
