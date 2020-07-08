@@ -18,6 +18,11 @@ const ITEM = styled.div`
   margin: 30px;
   line-height: 420px;
   border: 1px solid #c3c3c3;
+  ${({theme}) => theme.mobile(
+    `
+      width:90%;
+    `
+  )}
 `;
 
 const MENU = ({ item }) => {

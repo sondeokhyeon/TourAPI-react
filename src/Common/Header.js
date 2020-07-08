@@ -9,7 +9,7 @@ const HEADER = styled.header`
   float: left;
   position: fixed;
   border-right: 1px solid #b4b4b4;
-  @media only screen and (min-width: 300px) and (max-width: 600px) {
+  @media only screen and (min-width: 300px) and (max-width: 700px) {
     float: none;
     display: block;
     height: 0px;
@@ -24,16 +24,22 @@ const HEADER = styled.header`
 const UL = styled.ul`
   margin: 50px auto;
   height: 450px;
-  @media only screen and (min-width: 300px) and (max-width: 600px) {
+  & li:first-child {
+    display:none;
+    @media only screen and (min-width: 300px) and (max-width: 700px) {
+      display:block;
+    } 
+  }
+  @media only screen and (min-width: 300px) and (max-width: 700px) {
     margin: 0 auto;
-    height: 185px;
+    height: 222px;
     background-color: white;
   }
 `;
 
 const LI = styled.li`
   padding: 10px 0;
-  transition: background-color 0.3s;
+
   &:hover {
     background-color: gainsboro;
   }
@@ -46,7 +52,7 @@ const LI = styled.li`
     font-size: 17px;
     line-height: 2.3;
   }
-  @media only screen and (min-width: 300px) and (max-width: 600px) {
+  @media only screen and (min-width: 300px) and (max-width: 700px) {
     border-bottom: 1px solid #ddd;
     padding: 10px 0px;
     margin: 0px;
@@ -62,13 +68,15 @@ const HOME_BTN = styled(NavLink)`
   width: 30px;
   display: block;
   border-radius: 100px;
-  padding: 60px;
+  padding: 3rem;
   font-size: 21px;
   color: white;
   text-decoration: none;
   margin: 50px auto;
   font-weight: 600;
-  ${({ theme }) => theme.mobile(`display:none;`)}
+  @media only screen and (min-width: 300px) and (max-width: 700px) {
+    display:none;
+  }
   & span {
     position: relative;
     right: 7px;
@@ -77,7 +85,7 @@ const HOME_BTN = styled(NavLink)`
 
 const BTN_WRAP = styled.div`
   display: none;
-  @media only screen and (min-width: 300px) and (max-width: 600px) {
+  @media only screen and (min-width: 300px) and (max-width: 700px) {
     display: inline;
     float:right;
     background-color:white;
@@ -110,19 +118,34 @@ const Header = () => {
         </div>
         <UL>
           <LI>
-           <NavLink to="/spot">관광지 정보</NavLink>
+           <NavLink to="/" onClick={() => headerDispatch({
+             type : 'INIT'
+           })}>홈으로</NavLink>
           </LI>
           <LI>
-            <NavLink to="/festival"  >축제·행사 정보</NavLink>
+           <NavLink to="/spot" onClick={() => headerDispatch({
+             type : 'INIT'
+           })}>관광지 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/course"  >추천 여행코스 정보</NavLink>
+            <NavLink to="/festival" onClick={() => headerDispatch({
+             type : 'INIT'
+           })} >축제·행사 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/eatery"   >음식점 정보</NavLink>
+            <NavLink to="/course" onClick={() => headerDispatch({
+             type : 'INIT'
+           })} >추천 여행코스 정보</NavLink>
           </LI>
           <LI>
-            <NavLink to="/acc" >숙박업소 정보</NavLink>
+            <NavLink to="/eatery"  onClick={() => headerDispatch({
+             type : 'INIT'
+           })} >음식점 정보</NavLink>
+          </LI>
+          <LI>
+            <NavLink to="/acc"onClick={() => headerDispatch({
+             type : 'INIT'
+           })} >숙박업소 정보</NavLink>
           </LI>
           <BTN_WRAP>
             <BTN
