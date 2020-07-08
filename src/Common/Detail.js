@@ -4,107 +4,49 @@ import useAsync from "../util/useAsync";
 import styled from "styled-components";
 import { getDetailInfo } from "../util/API";
 import noImage from "../images/noimage.jpg"
-//import {Map, Marker} from 'react-kakao-maps'
-//import LOADING from "../Common/Loading";
+import { CONTAINER, CONTENTS } from '../Style/GlobalStyles'
 
-const CONTAINER = styled.div`
-  position: fixed;
-  background-color: #0000003d;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-`;
 
-const INNER_CONTAINER = styled.div`
-  background-color: white;
-  color: black;
-  margin: 3rem auto 0;
-  width: 100%;
-  height: 800px;
-  overflow: auto;
-  ${({theme}) => theme.mobile(
-    `
-    width: 100%;
-    `
-  )}
-`;
+const Detail = ({match}) => {
+  const { params : {contentId, itemNo}} = match 
+  const [state] = useAsync(getDetailInfo, { contentId, itemNo  }, true);
+  const { loading, data, error } = state;
 
-const MODAL_CONTAINER = styled.div`
-  position:absolute;
-  width:50%;
-  left:25%;
-  top:0;
-  ${({theme}) => theme.mobile(
-    `
-    width: 100%;
-    left:0;
-    `
-  )}
-`;
-
-const BUTTON_WRAP = styled.div`
-  text-align:center;
-`;
-
-const MODAL_SHUTDOWN = styled.div`
-  width:100%;
-  height:100%;
-`;
-
-const Detail = ({ detailInfo, setDetailInfo }) => {
-    const contentId = detailInfo.split("/")[0];
-    const itemNo = detailInfo.split("/")[1];
-    const [state] = useAsync(getDetailInfo, { contentId, itemNo }, true);
-    const { loading, data, error } = state;
-  
-    function closeModal() {
-      setDetailInfo(false);
-    }
-
-    useEffect(() => {
-      document.querySelector('body').style.overflow = 'hidden';
-      kakao.maps.load(() => {
-        let container = document.getElementById("map");
-        if(container) {
-          const mapRef = new kakao.maps.LatLng(data.info.mapy, data.info.mapx)
-          const mapContainer = new window.kakao.maps.Map(container, {
-            center: mapRef,
-            level:4
-          });
-          const mapMaker = new kakao.maps.Marker({
-            position:mapRef
-          })
-          mapMaker.setMap(mapContainer);
-        }
-      });
-      return () => {
-        document.querySelector('body').style.removeProperty('overflow')
+  useEffect(() => {
+    kakao.maps.load(() => {
+      let container = document.getElementById("map");
+      if(container) {
+        const mapRef = new kakao.maps.LatLng(data.info.mapy, data.info.mapx)
+        const mapContainer = new window.kakao.maps.Map(container, {
+          center: mapRef,
+          level:4
+        });
+        const mapMaker = new kakao.maps.Marker({
+          position:mapRef
+        })
+        mapMaker.setMap(mapContainer);
       }
-    })
+    });
+  })
     
-    if (loading) return <span>Loaindg...</span>;
-    if (error)
-      return <div>ERROR!(통신 및 원인 불명의 에러가 발생하였습니다.</div>;
-    if (!data) return <span>데이터가없습니다</span>;
+  if (loading) return <span>Loaindg...</span>;
+  if (error)
+    return <div>ERROR!(통신 및 원인 불명의 에러가 발생하였습니다.</div>;
+  if (!data) return <span>데이터가없습니다</span>;
 
-    return (
-      <CONTAINER >
-      <MODAL_SHUTDOWN onClick={closeModal}></MODAL_SHUTDOWN>
-        <MODAL_CONTAINER>
-        <INNER_CONTAINER>
-          <INFO_DETAIL info={data.info}  />
-          <INTRO_DETAIL intro={data.intro} />
-        </INNER_CONTAINER>
-        <BUTTON_WRAP>
-          <button onClick={closeModal}>CLOSE</button>
-        </BUTTON_WRAP>
-        </MODAL_CONTAINER>
-      </CONTAINER>
-    )
-  }
-  
+  return (
+    <CONTAINER >
+      <CONTENTS>
+        <INFO_DETAIL info={data.info}  />
+        <INTRO_DETAIL intro={data.intro} />
+        <SUB_TITLE>주소</SUB_TITLE>
+        <ADDR>{data.info.addr1} </ADDR>
+        <INFO_MAP id="map"></INFO_MAP>
+      </CONTENTS>
+    </CONTAINER>
+  )
+}
+
 const IMG = styled.img`
   margin-top:25px;
   width: 100%;
@@ -151,8 +93,6 @@ const INFO_DETAIL = ({ info }) => {
     <>
       <IMG src={info.firstimage ? info.firstimage : noImage} alt={info.title} />
       <TITLE>{info.title}</TITLE>
-      <ADDR> 주소 : {info.addr1} </ADDR>
-      <INFO_MAP id="map" ></INFO_MAP>
       <SUB_TITLE>소개</SUB_TITLE>
       <DESCIPTION>
         <p dangerouslySetInnerHTML={{ __html: info.overview }}></p>
@@ -161,18 +101,15 @@ const INFO_DETAIL = ({ info }) => {
   )
 }
 
-
 const INTRO_CONTAINER = styled.div`
   margin:30px;
-  &:last-child {
-    border-bottom:1px solid #c3c3c3;
-  }
+  padding-bottom:7px;
+  border-bottom: 1px solid #c3c3c3;
 `;
 const WRAPER = styled.dl`
   display:flex;
   text-align:center;
   border-top:1px solid #c3c3c3;
-
 `;
 const TIT = styled.dt`
   flex:1;

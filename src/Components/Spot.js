@@ -18,7 +18,6 @@ import {
 import AreaList from "../Common/AreaList";
 import "../Style/spot.scss";
 import DetailList from "../Common/DetailList";
-import Detail from "../Common/Detail";
 import { headerContext } from "../App";
 
 export default () => {
@@ -30,7 +29,6 @@ export default () => {
   const [major, setMajor] = useState("전체");
   const [minorDisplay, setMinorDisplay] = useState("none");
   const [minorCode, setMinorCode] = useState("");
-  const [detailInfo, setDetailInfo] = useState(false);
 
   const height = useRef(1920);
   const pageNo = useRef(1);
@@ -89,12 +87,9 @@ export default () => {
         </CONT_HEADER>
         <div className="container">
           {data.info && (
-            <DetailList item={data.info} setDetailInfo={setDetailInfo} />
+            <DetailList item={data.info}/>
           )}
         </div>
-        {detailInfo !== false && (
-          <Detail detailInfo={detailInfo} setDetailInfo={setDetailInfo} />
-        )}
         {data.info.length >= 24 && data.info[data.info.length - 1] && (
           <MORE_BTN
             onClick={() => {

@@ -13,6 +13,7 @@ import Eatery from "../Components/Eatery";
 import ACC from "../Components/Accommodations";
 import ERROR from "../Common/Error";
 import Header from "../Common/Header";
+import Detail from '../Common/Detail';
 
 export default () => {
   return (
@@ -24,6 +25,7 @@ export default () => {
         <Route path="/course" component={Course} />
         <Route path="/eatery" component={Eatery} />
         <Route path="/acc" component={ACC} />
+        <Route path="/detail/:itemNo/:contentId" component={Detail} />
         <Route path="/error" exact component={ERROR} />
         <Route path="/" exact component={HOME} />
         <Redirect from="*" to="error" />

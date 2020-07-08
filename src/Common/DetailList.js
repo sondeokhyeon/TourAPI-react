@@ -1,15 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 import noImage from "../images/noimage.jpg";
 
-const T_INFO = styled.div`
+const T_INFO = styled(Link)`
   display: inline-block;
   border: 1px solid #d9d9d9;
   width: 250px;
   height: 300px;
   margin: 10px; 
   box-sizing: border-box;
-  cursor: pointer;
+  color:black;
+  text-decoration:none;
   ${({theme}) => theme.mobile(
     `
       width: 95%;
@@ -51,7 +53,7 @@ const T_ADDR = styled.div`
   white-space: nowrap;
 `;
 
-const DetailList = ({ item, setDetailInfo }) => {
+const DetailList = ({ item }) => {
   if (item.length === 0) {
     return null;
   } else if (item[0] === undefined) {
@@ -60,12 +62,7 @@ const DetailList = ({ item, setDetailInfo }) => {
     return item.map((i, index) => {
       return (
         i && (
-          <T_INFO
-            key={index}
-            onClick={() => {
-              setDetailInfo(`${i.contentid}/${i.contenttypeid}`);
-            }}
-          >
+          <T_INFO key={index} to={`/detail/${i.contenttypeid}/${i.contentid}`} target="_blink">
             <T_IMG src={i.firstimage ? i.firstimage : noImage} alt={i.title} />
             <T_TITLE>{i.title}</T_TITLE>
             <T_ADDR>{i.addr1}</T_ADDR>

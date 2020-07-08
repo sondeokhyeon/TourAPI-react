@@ -18,7 +18,6 @@ import {
 import Loading from "../Common/Loading";
 import DetailList from "../Common/DetailList";
 import AreaList from "../Common/AreaList";
-import Detail from "../Common/Detail";
 import { headerContext } from "../App";
 
 export default React.memo(() => {
@@ -28,7 +27,6 @@ export default React.memo(() => {
   
   const [areaCode, setAreaCode] = useState("");
   const [minorCode, setMinorCode] = useState("");
-  const [detailInfo, setDetailInfo] = useState(false);
   const [major, setMajor] = useState("전체");
   const [minorDisplay, setMinorDisplay] = useState("none");
 
@@ -90,12 +88,9 @@ export default React.memo(() => {
         </CONT_HEADER>
         <div className="container">
           {data.info && (
-            <DetailList item={data.info} setDetailInfo={setDetailInfo} />
+            <DetailList item={data.info}  />
           )}
         </div>
-        {detailInfo !== false && (
-          <Detail detailInfo={detailInfo} setDetailInfo={setDetailInfo} />
-        )}
         {data.info.length >= 24 && data.info[data.info.length - 1] && (
           <MORE_BTN
             onClick={() => {
