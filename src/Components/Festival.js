@@ -16,7 +16,7 @@ import {
   BACK_DIM,
 } from "../Style/GlobalStyles";
 import Loading from "../Common/Loading";
-import DetailList from "../Common/DetailList";
+import InfoList from "../Common/InfoList";
 import AreaList from "../Common/AreaList";
 import { headerContext } from "../App";
 
@@ -88,7 +88,7 @@ export default React.memo(() => {
         </CONT_HEADER>
         <div className="container">
           {data.info && (
-            <DetailList item={data.info}  />
+            <InfoList item={data.info}  />
           )}
         </div>
         {data.info.length >= 24 && data.info[data.info.length - 1] && (

@@ -4,7 +4,7 @@ import {  headerContext } from '../App'
 import Loading from '../Common/Loading'
 import { CONTAINER, CONTENTS, BACK_DIM, CONT_HEADER, MAIN_TITLE, MORE_BTN, SUB_TITLE } from "../Style/GlobalStyles";
 import AreaList from '../Common/AreaList'
-import DetailList from '../Common/DetailList'
+import InfoList from '../Common/InfoList'
 
 export default () => {
 
@@ -74,7 +74,7 @@ export default () => {
         </CONT_HEADER>
         <div className="container">
           {data.info && (
-            <DetailList item={data.info}/>
+            <InfoList item={data.info}/>
           )}
         </div>
         {data.info.length >= 24 && data.info[data.info.length - 1] && (

@@ -17,7 +17,7 @@ import {
 } from "../Common/Store";
 import AreaList from "../Common/AreaList";
 import "../Style/spot.scss";
-import DetailList from "../Common/DetailList";
+import InfoList from "../Common/InfoList";
 import { headerContext } from "../App";
 
 export default () => {
@@ -87,7 +87,7 @@ export default () => {
         </CONT_HEADER>
         <div className="container">
           {data.info && (
-            <DetailList item={data.info}/>
+            <InfoList item={data.info}/>
           )}
         </div>
         {data.info.length >= 24 && data.info[data.info.length - 1] && (
