@@ -13,7 +13,7 @@ import Eatery from "../Components/Eatery";
 import ACC from "../Components/Accommodations";
 import ERROR from "../Common/Error";
 import Header from "../Common/Header";
-import Detail from '../Common/Detail';
+import Detail from '../Components/Detail/Detail';
 
 export default () => {
   return (
