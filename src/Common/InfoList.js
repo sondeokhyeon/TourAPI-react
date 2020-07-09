@@ -53,7 +53,7 @@ const T_ADDR = styled.div`
   white-space: nowrap;
 `;
 
-const DetailList = ({ item }) => {
+const InfoList = ({ item }) => {
   if (item.length === 0) {
     return null;
   } else if (item[0] === undefined) {
@@ -73,4 +73,4 @@ const DetailList = ({ item }) => {
   }
 };
 
-export default React.memo(DetailList);
+export default React.memo(InfoList);
