@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from "react";
 import { asyncReducer } from "../util/asyncReducer";
 
-function useAsync(callback, deps = "", skip = false) {
+function useAsync(callback, deps = "", skip = false, msg ='') {
   const [state, dispatch] = useReducer(asyncReducer, {
     loading: false,
     data: null,
